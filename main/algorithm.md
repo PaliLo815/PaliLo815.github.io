@@ -4,8 +4,8 @@ titles: Algorithm
 key: algorithm
 ---
 
-Just Test
+Just Test (updated)
 
-[t1](/algorithm/algo_test.md)
+[t1](/algorithm/algo_test.html)
 
-[t2](/algorithm/algo_test2.md)
+[t2](/algorithm/algo_test2.html)
