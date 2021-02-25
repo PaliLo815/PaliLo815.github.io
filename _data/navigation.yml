@@ -1,6 +1,6 @@
 header:
-  - titles: Algorithm
-    url: /algorithm.html
+  # - titles: Algorithm
+  #   url: /algorithm.html
 
   - titles:
       # @start locale config
