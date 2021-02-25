@@ -4,6 +4,13 @@ header:
 
   - titles:
       # @start locale config
+      en      : &EN       Test
+      ko      : &KO       테스트
+      # @end locale config
+    url: /test.html
+
+  - titles:
+      # @start locale config
       en      : &EN       Archive
       en-GB   : *EN
       en-US   : *EN
