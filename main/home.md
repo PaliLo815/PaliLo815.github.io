@@ -4,7 +4,7 @@ titles: Algorithm
 key: algorithm
 ---
 
-Just Test (updated)
+# Home Page
 
 [t1](/algorithm/algo_test.html)
 

@@ -1,9 +1,9 @@
 ---
-layout: landing
+layout: landing  
 title: PaliLo's
+permalink: /index.html
 excerpt: >
   동작이 잘 되나???
-permalink: /index.html
 
 article_header:
   actions:
@@ -47,3 +47,10 @@ data:
               type: primary
               url: /main/algorithm.html
 ---
+
+<script>
+  if (localStorage.getItem("visited")) {
+    window.location.href = "main/home";
+}
+localStorage.setItem("visited", "true");
+</script>
