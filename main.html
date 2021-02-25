@@ -1,0 +1,48 @@
+---
+layout: landing
+title: PaliLo's
+excerpt: >
+  동작이 잘 되나???
+permalink: /index.html
+
+article_header:
+  actions:
+    - text: Getting Started
+      type: error
+      url: /docs/en/quick-start
+    - text: Demo
+      type: outline-theme-dark
+      url: /test/
+  height: 100vh
+  theme: dark
+  background_color: "#367a9a"
+  background_image:
+    gradient: "linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .6))"
+    src: /assets/baekjoon_logo.png
+data:
+  sections:
+    - title: Algorithm
+      excerpt: 알고리즘 공부 내용 정리
+      actions:
+        - text: See Examples
+          url: /samples.html
+        - text: Learn More
+          url: /docs/en/configuration
+      background_color: "#A98D87"
+    - title: Problem Solving
+      children:
+        - title: 'Baekjoon <i class="fas fa-arrow-down"></i>'
+          excerpt: 백준 문제 풀이
+          image:
+            src: /assets/baekjoon_logo.png
+            style: "max-width: 200px; max-height: 200px"
+            is_row: true
+        - title: 'Codeforces <i class="fas fa-arrow-down"></i>'
+          excerpt: 코드포스 업솔빙
+          image:
+            src: /assets/codeforces_logo.png
+            style: "max-width: 200px; max-height: 200px"
+            is_row:
+      excerpt: This theme will look great on any device, no matter the size!
+      background_color: "#A98D87"
+---
