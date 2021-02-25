@@ -1,13 +1,6 @@
 header:
-  # - titles: Algorithm
-  #   url: /algorithm.html
-
-  - titles:
-      # @start locale config
-      en      : &EN       Test
-      ko      : &KO       테스트
-      # @end locale config
-    url: /test.html
+  - titles: Algorithm
+    url: /main/algorithm.md
 
   - titles:
       # @start locale config
