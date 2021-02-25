@@ -1,5 +1,6 @@
 header:
-  - titles: Algorithm
+  - titles:
+      en      : &EN       Algorithm
     url: /main/algorithm.md
 
   - titles:
