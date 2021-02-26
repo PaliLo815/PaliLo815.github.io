@@ -13,7 +13,7 @@ tags:
 
 ## Tutorial
 
-배열 $a$가 어떤 함수 `bool f(x)`에 의해 두 개의 그룹으로 나뉘어지는 partitioned array일 경우 사용 가능한 알고리즘이다.
+배열 $a$가 어떤 함수 `bool f(x)`에 의해 두 개의 그룹으로 나뉘는 partitioned array일 경우 사용 가능한 알고리즘이다.
 
 즉, `f`에 $a$의 각 원소를 넣고 실행한 결과 $f(a_0), f(a_1), \cdots, f(a_{n-1})$가
 
@@ -26,17 +26,17 @@ $$
 
 반드시 둘 중 하나의 꼴이어야만 한다.
 
-주로 `bool f(x)`는 문제의 조건으로 주어지고, 저 조건을 만족하는($f(a_i) = \text{True}$) $i$의 최솟값 또는 최댓값을 찾아야 한다. 최솟값을 찾는 경우엔 1번 꼴일 것이며 최댓값일 경우엔 2번 꼴일 것이다.
+주로 `bool f(x)`는 문제의 조건으로 주어지고, 저 조건을 만족하는($f(a_i) = \text{True}$) $i$의 최솟값 또는 최댓값을 찾아야 한다. 최솟값을 찾는 경우엔 1번꼴일 것이며 최댓값일 경우엔 2번꼴일 것이다.
 
-배열 $a$를 정수나 실수 집합 전체로 확장시키는 경우, 매개 변수 탐색(parametric search)라고 한다. PS 영역에서 둘을 딱히 구별지을 필요는 없다.
+배열 $a$를 정수나 실수 집합 전체로 확장하는 경우, 매개 변수 탐색(parametric search)이라고 한다. PS 영역에서 둘을 딱히 구별 지을 필요는 없다.
 
 - - -
 
 이제 우리는 탐색 범위 $[mn, mx]$와 `bool f(x)`를 설정하기만 하면 된다.
 
-문제에서 탐색할 배열을 직접 주거나 범위의 최솟값과 최댓값이 명시되어 있을 경우 그대로 사용하면 되지만, 그렇지 않을 경우 직접 가능한 해의 범위를 계산해야 한다.
+문제에서 탐색할 배열을 직접 주거나 범위의 최솟값과 최댓값이 명시되어 있으면 그대로 사용하면 되지만, 그렇지 않으면 직접 가능한 해의 범위를 계산해야 한다.
 
-핵심은 `bool f(x)`를 만드는 것이다. 범위 내의 수를 $\text{False}, \cdots, \text{False}, \text{True}, \cdots, \text{True}$ 또는 $\text{True}, \cdots, \text{True}, \text{False}, \cdots, \text{False}$ 꼴로 분리시키는 함수라고 생각하면 쉽다.
+핵심은 `bool f(x)`를 만드는 것이다. 범위 내의 수를 $\text{False}, \cdots, \text{False}, \text{True}, \cdots, \text{True}$ 또는 $\text{True}, \cdots, \text{True}, \text{False}, \cdots, \text{False}$ 꼴로 분리하는 함수라고 생각하면 쉽다.
 
 ```cpp
 const int mn = 0, mx = 1e9;
@@ -121,7 +121,7 @@ auto hi = upper_bound(vt.begin(), vt.end(), key, [&](const auto& key, const auto
 
 ### partition_point
 
-partitioned array에서 두 번째 그룹의 시작점을 반환한다. parametric search가 아니라 주어진 배열 안에서의 binary search인 경우 사용하면 된다.
+partitioned array에서 두 번째 그룹의 시작점을 반환한다. parametric search가 아니라 주어진 배열 안에서의 binary search일 때 사용하면 된다.
 
 **주의)** 여기서 말하는 partitioned array는 $\text{True}, \cdots, \text{True}, \text{False}, \cdots, \text{False}$ 꼴이다. 두 번째 그룹이 $\text{False}$가 되도록 함수를 만들어서 넘겨줘야 한다.
 {:.error}
