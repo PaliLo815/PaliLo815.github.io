@@ -1,18 +1,15 @@
 ---
-layout: landing  
-title: PaliLo's
-permalink: /index.html
-excerpt: >
-  동작이 잘 되나???
+layout: article
+titles: Algorithm
+key: algorithm
+---
 
-article_header:
-  actions:
-    - text: Start
-      type: error
-      url: /main/home.html
-  height: 100vh
-  theme: dark
-  background_color: "#000000"
+# Home Page
+
+[t1](/algorithm/algo_test.html)
+
+[t2](/algorithm/algo_test22.html)
+/*
 data:
   sections:
     - title: Algorithm
@@ -21,6 +18,12 @@ data:
         - text: Click
           type: primary
           url: /main/algorithm.html
+
+          dsegewgww
+          gewgw
+          gesgse
+
+fefse
 
     - title: Problem Solving
       children:
@@ -46,11 +49,4 @@ data:
             - text: Click
               type: primary
               url: /main/algorithm.html
----
-
-<script>
-  if (localStorage.getItem("visited")) {
-    window.location.href = "main/home";
-}
-localStorage.setItem("visited", "true");
-</script>
+*/

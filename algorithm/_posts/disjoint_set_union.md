@@ -1,0 +1,84 @@
+---
+layout: page
+title: "Disjoint Set Union"
+category: algorithm
+---
+
+0. this unordered seed list will be replaced by toc as unordered list
+{:toc}
+
+## Introduction
+
+여러 집합을 관리하는 자료구조. 두 집합을 합치는 연산(union), 어떤 원소가 어느 집합에 들어있는지 알려주는 연산(find)을 해주기 때문에 Union-Find라고도 불린다.
+
+cpp에는 union라는 keyword가 있으므로 보통 merge로 바꿔서 쓴다.
+
+## Tutorial
+
+집합을 tree라고 생각하자.
+
+tree의 root는 유일하므로 root를 가지고 집합을 구분할 수 있다. 두 tree를 합칠 때에는 한 tree의 root의 부모를 다른 tree의 root로 만들면 된다.
+
+```cpp
+// 루트의 경우 부모가 -1
+int par[mxN];
+
+void init(int n) {
+    memset(par, -1, sizeof(par[0]) * n);
+}
+int find(int u) {
+    while (~par[u]) u = par[u];
+    return u;
+}
+bool merge(int u,int v) {
+    u = find(u), v = find(v);
+    if(u == v) return false;
+    par[v] = u;
+    return true;
+}
+```
+
+시간 복잡도를 보자.
+
+최악의 경우는 tree가 일자가 되는 경우고, 이때의 `find`의 복잡도는 $$O(n)$$이다. `merge`의 복잡도도 $$O(n)$$이므로 연산 당 $$O(n)$$이다.
+
+이를 최적화하는 두 가지 방법이 있다. 둘을 섞어서 써도 되므로 대개는 둘을 같이 쓴다. 두 최적화를 같이 해주면 연산의 복잡도는 $$O(\alpha(n))$$이 된다.
+
+**Path Compression**의 경우 tree의 구조를 바꾸게 되므로, 몇몇 문제의 경우 사용하지 않아야 한다.
+
+###### Union by Rank / Size
+
+tree를 합칠 때 크기가 작은 tree를 큰 tree의 자식으로 만들어준다면, 어떤 node의 subtree size는 그 부모의 subtree size의 절반 이하다. tree의 크기가 $$n$$일 때, 이 tree의 높이는 $$\log_2{n}$$보다 클 수 없으므로 시간 복잡도는 $$O(\log n)$$이 된다.
+
+###### Path Compression
+
+최악의 경우는 tree가 일자가 되는 경우라면 최고의 경우는 root를 제외한 모든 node가 root의 자식인 경우다.
+
+단순히 tree의 root를 찾길 원하는 경우, 우리는 tree의 원래 형태를 유지할 필요가 없다. 즉, root를 건드리지 않는 한도에서 edge를 마음대로 바꿔도 된다.
+
+`find(u)`를 실행할 때 $$u$$부터 root까지 모든 node에 접근한다. 그때 그 모든 node의 부모를 root로 바꿔주면 tree를 최고의 경우에 가깝게 만들어 나갈 수 있다.
+
+$$m$$개의 연산이 있을 경우 전체 복잡도는 $$O((n + m) \log n)$$이다. 연산 당 평균적으로 $$O(\log n)$$인 셈이다.
+
+증명은 [여기](https://cs.stackexchange.com/questions/48649/complexity-of-union-find-with-path-compression-without-rank#:~:text=Wikipedia%20says%20union%20by%20rank,inverse%20of%20the%20Ackerman%20function)를 참고하자.
+
+## Code
+
+```cpp
+struct disjoint_set {
+    vector<int> par;
+    disjoint_set(int n) : par(n, -1) {}
+    int find(int u) {
+        return par[u] < 0 ? u : par[u] = find(par[u]);
+    }
+    bool merge(int u, int v) {
+        u = find(u), v = find(v);
+        if (u == v) return false;
+
+        if (par[u] > par[v]) swap(u, v);
+        par[u] += par[v];
+        par[v] = u;
+        return true;
+    }
+};
+```
