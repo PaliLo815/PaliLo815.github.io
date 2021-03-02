@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Segment tree
+title: Segment Tree
 aside:
   toc: true
 tags:
