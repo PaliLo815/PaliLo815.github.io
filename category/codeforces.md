@@ -7,7 +7,7 @@ sidebar:
   nav: codeforces
 ---
 
-# 문제 풀이를 올리자
+이전에 업솔빙 한 내용들 옮길 예정...
 
 # div.1
 

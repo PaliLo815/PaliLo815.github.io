@@ -1,7 +1,10 @@
 header:
+  # - titles:
+  #     en      : &EN       Home
+  #   url: /category/home
   - titles:
-      en      : &EN       Algorithm
-    url: /category/algorithm
+      en      : &EN       Library
+    url: /category/library
   - titles:
       en      : &EN       Baekjoon
     url: /category/baekjoon
@@ -18,9 +21,9 @@ header:
     url: /about
 
 codeforces:
-  - title:      Start
+  - title:      Codeforces
     children:
-      - title:  Quick Start
+      - title:  div. 1
         url:    /docs/en/quick-start
-      - title:  Structure
+      - title:  div. 2
         url:    /docs/en/structure
