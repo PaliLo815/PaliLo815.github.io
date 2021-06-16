@@ -94,9 +94,9 @@ bool is_same(int u, int v)
 
 - $O(\alpha (n))$
 
-## Code
+# Code
 
-[LINK](https://github.com/PaliLo815/Team-Library/blob/f22c5f557775e116601061ed192ec6da4dc70890/data/disjoint_set.cpp)
+[github link (CLICK)](https://github.com/PaliLo815/Team-Library/blob/f22c5f557775e116601061ed192ec6da4dc70890/data/disjoint_set.cpp)
 
 ```cpp
 /**

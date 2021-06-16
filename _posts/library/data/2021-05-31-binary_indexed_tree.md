@@ -9,52 +9,31 @@ tags:
 
 `segment tree`에서 불필요한 node를 없애서 메모리 사용을 줄인 자료구조다. 메모리가 줄었으므로 캐시 효율도 좋아져서 속도도 빨라진다.
 <center><img src="/assets/images/library/data/binary_indexed_tree/0.png"></center>
-<center><i>$n = 8$일 때의 range sum segment tree</i></center>
+<center><i>$n = 8$일 때의 range sum segment tree<br>1-based indexing인 이유는 이후에 나온다.</i></center>
 
 위의 segment tree를 보자. 굳이 $$2n - 1$$개의 node마다 range sum을 일일이 저장하고 있어야 할까?
 
-이를테면 $$\text{sum}[4,8) = 7$$은 굳이 필요 없다. $$\text{sum}[0,8) - \text{sum}[0,4) = 7$$와 같은 방식으로, 다른 값을 이용해 계산할 수 있기 때문이다.
+이를테면 $$\text{sum}[5,9) = 48$$은 굳이 필요 없다. $$\text{sum}[1,9) - \text{sum}[1,5) = 73 - 25 = 48$$와 같은 방식으로, 다른 값을 이용해 계산할 수 있기 때문이다.
 
 이를 일반화해보자. 어떤 $$node_i$$의 $$child_{left}$$와 $$child_{right}$$가 있을 때, 둘 중 하나는 필요 없다.
 
 segment tree의 $$2n - 1$$개 node 중 leaf node가 $$n$$개, non leaf node가 $$n - 1$$개다. 모든 non leaf node는 각자의 두 chlid node 중 하나를 버려도 되니 총 node 수를 $$(2n - 1) - (n - 1) = n$$개로 줄일 수 있다.
 
 <center><img src="/assets/images/library/data/binary_indexed_tree/1.png"></center>
-<center><i>필요없는 node가 지워진 segment tree <br> 이것이 binary indexed tree다.</i></center>
-
-###### properties
-
-모든 non leaf node의 right child를 없애고, 남은 node를 index에 맞춰서 오른쪽으로 밀어보자.
-
-![](/assets/img/algorithm/fenwick_tree/2.jpg)
-
-right child가 없어진 자리에 그 parent node를 겹쳐서 놓는다. X표 node는 없어진 right child node다. 
-
-없앤 node에 update를 해야 할 경우 그냥 건너뛴다.
-
-예) update 3
-
-| Segment Tree | Fenwick Tree |
-|:------------:|:------------:|
-|![](/assets/img/algorithm/fenwick_tree/3.jpg)|![](/assets/img/algorithm/fenwick_tree/4.jpg)|
-
-예) update 7
-
-| Segment Tree | Fenwick Tree |
-|:------------:|:------------:|
-|![](/assets/img/algorithm/fenwick_tree/5.jpg)|![](/assets/img/algorithm/fenwick_tree/6.jpg)|
+<center><i>right child를 없애고 남은 node를 index에 맞춰서 오른쪽으로 민 segment tree<br>이것이 binary indexed tree다.</i></center>
 
 - - -
 
-node 번호의 이진수 표현과 나타내는 구간 사이에서 연관성을 찾을 수 있다.
+이름이에서 유추할 수 있듯, node의 index를 이진수로 표현하면 규칙성을 찾을 수 있다.
 
-lsb(최하위 비트)는 구간의 길이를, lsb를 제외한 나머지는 구간의 시작점을 나타낸다.
+index의 rightmost set bit은 구간의 길이를, rightmost set bit을 제외한 나머지는 구간의 시작점을 나타낸다.
+{:.info}
 
-예를 들어 6(0110)의 경우 lsb 0010과 lsb를 제외한 나머지(0110 - 0010 = 0100)로 나뉜다. 이는 구간의 시작점이 4(0100)이고, 길이가 2(0010)이란 뜻이다. 즉, $$tree_6 = a_4 + a_5$$를 나타낸다. 
+예를 들어 6(0110)의 경우 rightmost set bit은 2(0010)고 rightmost set bit을 제외한 나머지(0110 - 0010)는 4(0100)다. 따라서 시작점이 4고 길이가 2인 구간 $[4, 6)$의 구간합을 가지고 있는다.
 
 몇 가지 예시를 더 보자.
 
-| Decimal | Binary | lsb | 나머지 | 구간 |
+| decimal | binary | 길이 | 시작점 | 구간 |
 |:-------:|:------:|:---:|:-----:|:---:|
 | 3 | 0011 | 0001 (1) | 0010 (2) | $$[2, 3)$$ |
 | 4 | 0100 | 0100 (4) | 0000 (0) | $$[0, 4)$$ |
@@ -68,6 +47,8 @@ lsb(최하위 비트)는 구간의 길이를, lsb를 제외한 나머지는 구�
 
 전부 $$tree_4$$에서 겹친다. $$tree_4$$ 아래에 지워진 node가 (1), (2) node다.
 
+- - -
+
 ###### update
 
 이 특징을 이용해 update를 해보자.
@@ -75,7 +56,6 @@ lsb(최하위 비트)는 구간의 길이를, lsb를 제외한 나머지는 구�
 1. 어떤 node를 update했다면 segment tree에서 해당 node부터 root까지 parent node를 update시켜야 한다.
 2. parent node의 구간은 left child node의 구간과 시작점은 같고, 길이는 두 배다.
 3. 따라서 fenwick tree에서 어떤 node에 lsb를 더해 주면(길이를 두 배로 해주면) parent node가 된다.
-4. fenwick tree에서 root의 index는 $$n$$이다.
 
 이를 코드로 나타내면 아래와 같다.
 
